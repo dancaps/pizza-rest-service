@@ -1,0 +1,25 @@
+{
+  "pizzas": [
+    {
+      "id": 1,
+      "dough": "thin",
+      "sauce": "pesto",
+      "cheese": "mozzarella",
+      "toppings": "chicken"
+    },
+    {
+      "id": 2,
+      "dough": "regular",
+      "sauce": "marinara",
+      "cheese": "mozzarella",
+      "toppings": "ham"
+    },
+    {
+      "id": 3,
+      "dough": "thick",
+      "sauce": "mo",
+      "cheese": "mozzarella",
+      "toppings": "sausage"
+    }
+  ]
+}
