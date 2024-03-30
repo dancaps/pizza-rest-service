@@ -1,6 +1,7 @@
 package com.welcometodannyland.pizza.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
@@ -9,17 +10,17 @@ import java.util.List;
 @Entity
 public class Pizza {
         @Id
-        Integer id;
-        String dough;
-        String sauce;
-        String cheese;
-        String toppings;
+        @GeneratedValue
+        private Integer id;
+        private String dough;
+        private String sauce;
+        private String cheese;
+        private String toppings;
 
         public Pizza() {
         }
 
-        public Pizza(Integer id, String dough, String sauce, String cheese, String toppings) {
-                this.id = id;
+        public Pizza(String dough, String sauce, String cheese, String toppings) {
                 this.dough = dough;
                 this.sauce = sauce;
                 this.cheese = cheese;

@@ -1,0 +1,13 @@
+{
+  "doughs": [
+    {
+      "doughType": "thin"
+    },
+    {
+      "doughType": "thick"
+    },
+    {
+      "doughType": "regular"
+    }
+  ]
+}

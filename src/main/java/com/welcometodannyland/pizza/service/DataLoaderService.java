@@ -2,7 +2,9 @@ package com.welcometodannyland.pizza.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.welcometodannyland.pizza.entity.Doughs;
 import com.welcometodannyland.pizza.entity.Pizzas;
+import com.welcometodannyland.pizza.repository.DoughRepository;
 import com.welcometodannyland.pizza.repository.PizzaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,31 +18,47 @@ import java.io.InputStream;
 public class DataLoaderService implements CommandLineRunner {
 
     private final Logger log = LoggerFactory.getLogger(DataLoaderService.class);
-    private final PizzaRepository repository;
+    private final PizzaRepository pizzaRepository;
+    private final DoughRepository doughRepository;
     private final ObjectMapper objectMapper;
-    private final String DATA_PATH = "/data/pizza.json";
 
-    public DataLoaderService(PizzaRepository pizzaRepository, ObjectMapper objectMapper) {
-        this.repository = pizzaRepository;
+    public DataLoaderService(PizzaRepository pizzaRepository, DoughRepository doughRepository, ObjectMapper objectMapper) {
+        this.pizzaRepository = pizzaRepository;
+        this.doughRepository = doughRepository;
         this.objectMapper = objectMapper;
     }
 
     @Override
     public void run(String... args) {
         loadPizzaTable();
+        loadDoughTable();
     }
 
     private void loadPizzaTable() {
-        if(repository.findAll().isEmpty()) {
-            try (InputStream inputStream = TypeReference.class.getResourceAsStream(this.DATA_PATH)) {
+        if(pizzaRepository.findAll().isEmpty()) {
+            try (InputStream inputStream = TypeReference.class.getResourceAsStream("/data/pizza.json")) {
                 Pizzas allPizzas = objectMapper.readValue(inputStream, Pizzas.class);
                 log.info("==> Reading {} pizzas from the data file and saving it to the database.", allPizzas.pizzas().size());
-                repository.saveAll(allPizzas.pizzas());
+                pizzaRepository.saveAll(allPizzas.pizzas());
             } catch (IOException e) {
                 throw new RuntimeException("Failed to read JSON data", e);
             }
         } else {
             log.info("==> There are pizzas in the database. Skipping data loader for the pizza table.");
+        }
+    }
+
+    private void loadDoughTable() {
+        if(doughRepository.findAll().isEmpty()) {
+            try (InputStream inputStream = TypeReference.class.getResourceAsStream("/data/doughs.json")) {
+                Doughs allDoughs = objectMapper.readValue(inputStream, Doughs.class);
+                log.info("==> Reading {} dough types from the data file and saving it to the database.", allDoughs.doughs().size());
+                doughRepository.saveAll(allDoughs.doughs());
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to read JSON data for dough types", e);
+            }
+        } else {
+            log.info("==> There is dough in the database. Skipping data loader for the dough table.");
         }
     }
 }
