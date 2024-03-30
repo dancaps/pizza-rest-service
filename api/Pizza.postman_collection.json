@@ -8,6 +8,20 @@
 	"item": [
 		{
 			"name": "localhost:8080/api/pizzas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -27,6 +41,20 @@
 		},
 		{
 			"name": "localhost:8080/api/pizzas/{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -47,12 +75,26 @@
 		},
 		{
 			"name": "localhost:8080/api/pizzas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 4,\n    \"dough\": \"thin\",\n    \"sauce\": \"pesto\",\n    \"cheese\": \"mozzarella\",\n    \"toppings\": \"pepperoni\"\n}",
+					"raw": "{\n    \"dough\": \"thin\",\n    \"sauce\": \"pesto\",\n    \"cheese\": \"mozzarella\",\n    \"toppings\": \"pepperoni\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

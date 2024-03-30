@@ -9,7 +9,7 @@ public class Dough {
 
     @Id
     @GeneratedValue()
-    private long doughId;
+    private int doughId;
     private String doughType;
 
     public String getDoughType() {

@@ -9,9 +9,10 @@ import java.util.List;
 
 @Entity
 public class Pizza {
+
         @Id
         @GeneratedValue
-        private Integer id;
+        private int id;
         private String dough;
         private String sauce;
         private String cheese;
@@ -27,12 +28,8 @@ public class Pizza {
                 this.toppings = toppings;
         }
 
-        public Integer getId() {
+        public int getId() {
                 return id;
-        }
-
-        public void setId(Integer id) {
-                this.id = id;
         }
 
         public String getDough() {
@@ -65,16 +62,5 @@ public class Pizza {
 
         public void setToppings(String toppings) {
                 this.toppings = toppings;
-        }
-
-        @Override
-        public String toString() {
-                return "Pizza{" +
-                        "id=" + id +
-                        ", dough='" + dough + '\'' +
-                        ", sauce='" + sauce + '\'' +
-                        ", cheese='" + cheese + '\'' +
-                        ", toppings='" + toppings + '\'' +
-                        '}';
         }
 }

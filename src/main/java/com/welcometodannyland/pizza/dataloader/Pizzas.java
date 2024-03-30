@@ -1,4 +1,4 @@
-package com.welcometodannyland.pizza.entity;
+package com.welcometodannyland.pizza.dataloader;
 
 import com.welcometodannyland.pizza.entity.Pizza;
 

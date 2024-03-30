@@ -1,9 +1,7 @@
-package com.welcometodannyland.pizza.service;
+package com.welcometodannyland.pizza.dataloader;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.welcometodannyland.pizza.entity.Doughs;
-import com.welcometodannyland.pizza.entity.Pizzas;
 import com.welcometodannyland.pizza.repository.DoughRepository;
 import com.welcometodannyland.pizza.repository.PizzaRepository;
 import org.slf4j.Logger;
@@ -36,7 +34,7 @@ public class DataLoaderService implements CommandLineRunner {
 
     private void loadPizzaTable() {
         if(pizzaRepository.findAll().isEmpty()) {
-            try (InputStream inputStream = TypeReference.class.getResourceAsStream("/data/pizza.json")) {
+            try (InputStream inputStream = TypeReference.class.getResourceAsStream("/data/pizzas.json")) {
                 Pizzas allPizzas = objectMapper.readValue(inputStream, Pizzas.class);
                 log.info("==> Reading {} pizzas from the data file and saving it to the database.", allPizzas.pizzas().size());
                 pizzaRepository.saveAll(allPizzas.pizzas());
