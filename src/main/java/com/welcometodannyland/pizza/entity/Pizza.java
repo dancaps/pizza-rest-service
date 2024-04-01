@@ -1,21 +1,31 @@
 package com.welcometodannyland.pizza.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import jakarta.persistence.*;
 
-import java.util.List;
-
-@Entity
+@Entity(name = "Pizza")
+@Table(name = "pizza")
 public class Pizza {
 
         @Id
-        @GeneratedValue
-        private int id;
+        @SequenceGenerator(name = "id",
+                sequenceName = "id",
+                allocationSize = 1)
+        @GeneratedValue(generator = "id")
+        @Column(name = "id",
+                updatable = false)
+        private Integer id;
+
+        @Column(name = "dough",
+                nullable = false)
         private String dough;
+
+        @Column(name = "sauce")
         private String sauce;
+
+        @Column(name = "cheese")
         private String cheese;
+
+        @Column(name = "toppings")
         private String toppings;
 
         public Pizza() {
@@ -28,7 +38,7 @@ public class Pizza {
                 this.toppings = toppings;
         }
 
-        public int getId() {
+        public Integer getId() {
                 return id;
         }
 
